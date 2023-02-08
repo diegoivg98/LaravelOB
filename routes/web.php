@@ -15,11 +15,27 @@ use App\Http\Controllers\MyFirstController;
 |
 */
 
+Route::get('/post/{category}/{slug?}', function ($category, $slug = null) {
+    $miCategoria = $this->recuperarMiCategoria($category);
+    if ($slug == null)
+        $post = $this->recuperarMiUltimoPost();
+    else
+        $post = $this->recuperarMiPostMedianteSlug($slug);
+    return $post;
+});
+
+Route::match(['GET', 'POST'],'/{slug?}/{subslug?}/{subsubslug?}',
+    function ($slug = 'laravel-9', $subsubslug = null, $subslug = null) {
+        $category = $this->recuperarMiPostMedianteSlug($slug);
+        return $category;
+    });
+
+
 /* Creating a route that will return the home view. */
-Route::view('/','home');
-Route::get('/contacto',[MyFirstController::class,'contactPage']);
-Route::post('/contacto',[MyFirstController::class,'processContact']);
-Route::put('/contacto',[MyFirstController::class,'processContactPut']);
+Route::view('/', 'home');
+Route::get('/contacto', [MyFirstController::class, 'contactPage']);
+Route::post('/contacto', [MyFirstController::class, 'processContact']);
+Route::put('/contacto', [MyFirstController::class, 'processContactPut']);
 //Route::patch('/contacto',[MyFirstController::class,'processContact']);
 //Route::delete('/contacto',[MyFirstController::class,'processContact']);
 //Route::head('/contacto',[MyFirstController::class,'processContact']);
@@ -31,4 +47,4 @@ Route::put('/contacto',[MyFirstController::class,'processContactPut']);
 
 
 /* Creating a route that will call the index method of the MyFirstController class. */
-Route::get('/example',[MyFirstController::class,'index']);
+Route::get('/example', [MyFirstController::class, 'index']);
