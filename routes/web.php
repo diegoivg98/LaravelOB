@@ -15,10 +15,11 @@ use App\Http\Controllers\MyFirstController;
 |
 */
 
-Route::get('/{category}/{slug}/{uuid}', function ($category = 'a',$slug = 'post') {
-    echo $category.'<br />'. $slug ;
+Route::get('/{category}/{slug}/{uuid}', function ($category = 'a', $slug = 'post') {
+    echo $category . '<br />' . $slug;
 })->whereAlpha('category')->whereAlphaNumeric('slug')->whereUuid('uuid');
 
+Route::get('/my-controller/{id}', [MyFirstController::class,'myControllerFunction']);
 
 
 /* Creating a route that will return the home view. */
