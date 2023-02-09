@@ -15,20 +15,10 @@ use App\Http\Controllers\MyFirstController;
 |
 */
 
-Route::get('/post/{category}/{slug?}', function ($category, $slug = null) {
-    $miCategoria = $this->recuperarMiCategoria($category);
-    if ($slug == null)
-        $post = $this->recuperarMiUltimoPost();
-    else
-        $post = $this->recuperarMiPostMedianteSlug($slug);
-    return $post;
-});
+Route::get('/{category}/{slug}/{uuid}', function ($category = 'a',$slug = 'post') {
+    echo $category.'<br />'. $slug ;
+})->whereAlpha('category')->whereAlphaNumeric('slug')->whereUuid('uuid');
 
-Route::match(['GET', 'POST'],'/{slug?}/{subslug?}/{subsubslug?}',
-    function ($slug = 'laravel-9', $subsubslug = null, $subslug = null) {
-        $category = $this->recuperarMiPostMedianteSlug($slug);
-        return $category;
-    });
 
 
 /* Creating a route that will return the home view. */
