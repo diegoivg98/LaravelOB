@@ -15,6 +15,12 @@ use App\Http\Controllers\MyFirstController;
 |
 */
 
+ Route::get('/my-second-example-laravel-9',function(){
+     echo "Hola";
+ })->name('myindex');
+
+ Route::view('/my-routename-example','routename');
+
 Route::get('/{category}/{slug}/{uuid}', function ($category = 'a', $slug = 'post') {
     echo $category . '<br />' . $slug;
 })->whereAlpha('category')->whereAlphaNumeric('slug')->whereUuid('uuid');
