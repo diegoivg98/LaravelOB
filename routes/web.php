@@ -15,9 +15,15 @@ use App\Http\Controllers\MyFirstController;
 |
 */
 
- Route::get('/my-second-example-laravel-9',function(){
-     echo "Hola";
- })->name('myindex');
+Route::prefix('/post')->group(function(){
+    Route::get('/my-second-example-laravel-9',function(){
+        echo "Hola segundo";
+    })->name('myindex');
+
+    Route::get('/my-third-example-laravel-9',function(){
+        echo "Hola tercero";
+    })->name('myindex');
+});
 
  Route::view('/my-routename-example','routename');
 
